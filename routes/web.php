@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PatterMatchingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserSearchHistoryController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,9 @@ Route::get('/', function () {
 
 Route::get('/user-search-history', [UserSearchHistoryController::class, 'index'])->name('user-search-history');
 Route::post('/get-filtered-user-search-history', [UserSearchHistoryController::class, 'getFilteredData'])->name('get-filtered-user-search-history');
+
+Route::get('/pattern-matching', [PatterMatchingController::class, 'index'])->name('pattern-matching');
+Route::post('/get-pattern-matched-info', [PatterMatchingController::class, 'getMatchedInfo'])->name('get-pattern-matched-info');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
