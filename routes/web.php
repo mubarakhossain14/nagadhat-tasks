@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserSearchHistoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+Route::get('/user-search-history', [UserSearchHistoryController::class, 'index'])->name('user-search-history');
+Route::post('/get-filtered-user-search-history', [UserSearchHistoryController::class, 'getFilteredData'])->name('get-filtered-user-search-history');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
