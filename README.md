@@ -1,66 +1,88 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Application Setup Documentation
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This documentation will guide you through the process of setting up a Laravel application from cloning it from a Git repository to serving it locally with database seeding, using Composer and npm.
 
-## About Laravel
+## Cloning the Laravel Project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+First, clone the Laravel project from the Git repository to your local machine. You can do this using the `git clone` command followed by the URL of the Git repository. For example:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```bash
+git clone git@github.com:mubarakhossain14/nagadhat-tasks.git nagadhat-tasks
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installing Dependencies
 
-## Learning Laravel
+After cloning the project, navigate to the project directory and install the necessary dependencies. Laravel uses Composer for PHP dependencies and npm for JavaScript dependencies. You can install these dependencies using the following commands:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+composer install
+npm install
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Setting Up Environment Variables
 
-## Laravel Sponsors
+Next, set up the environment variables for your Laravel application. Laravel uses the `.env` file to manage environment variables. You can create a `.env` file by copying the `.env.example` file:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+cp .env.example .env
+```
 
-### Premium Partners
+Then, open the `.env` file and set up your database connection details. You will need to specify the database name, username, and password. For example:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-## Contributing
+Replace `your_database_name`, `your_username`, and `your_password` with your actual database name, username, and password 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Generating Application Key
 
-## Code of Conduct
+After setting up the `.env` file, generate an application key using the `php artisan key:generate` command:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+This command will generate a unique key for your Laravel application and store it in the `APP_KEY` field of the `.env` file.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Running Database Migrations and Seeding
 
-## License
+Next, run the database migrations using the `php artisan migrate` command:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan migrate
+```
+
+This command will create the necessary tables in your database. If your project includes a database seeder, you can run it using the `php artisan db:seed` command:
+
+```bash
+php artisan db:seed
+```
+
+This command will populate your database with some initial data.
+
+## Serving the Application
+
+Finally, serve your Laravel application locally using the `php artisan serve` command:
+
+```bash
+php artisan serve
+```
+
+By default, your application will be served at `http://localhost:8000`. You can access your application by opening this URL in your web browser.
+
+## Building the Application
+
+After setting up the application, you may need to build it using npm. You can do this using the `npm run dev` command:
+
+```bash
+npm run dev
+```
+
+This command will compile your JavaScript and CSS assets. After building the application, you may need to clear the configuration cache using the `php artisan config:clear`
